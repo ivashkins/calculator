@@ -3,7 +3,7 @@ package com.company;
 import java.util.List;
 
 public class RomanianOperation {
-    public RomanianOperation(String s) throws ExceptionIncorrectSymbolOperation {
+    public RomanianOperation(String s) throws ExceptionIncorrectSymbolOperation, ExceptionMaxNumber {
         if(s.contains("+")){String [] w=s.split("\\+"); romanianParse(w,"Sum");}
         else if(s.contains("/")){String [] w=s.split("/"); romanianParse(w,"Del");}
         else if(s.contains("*")){String [] w=s.split("\\*"); romanianParse(w,"Incr");}
@@ -57,9 +57,10 @@ public class RomanianOperation {
         return sb.toString();
     }
 
-    public void romanianParse(String []w,String key){
+    public void romanianParse(String []w,String key) throws ExceptionMaxNumber {
         long a=romanToArabic(w[0]);
         long b=romanToArabic(w[1]);
+        if(a>10||b>10){ throw new ExceptionMaxNumber();}
         long c = switch (key) {
             case "Sum" -> a + b;
             case "Del" -> a / b;

@@ -11,7 +11,7 @@ public class Main {
             s=s.trim();
             if (s.length() > 21) { throw new ExceptionLengthSymbols(); }
             else {
-                if(s.matches(".*\\d.*")){ new MathOperation(s);}
+                if(s.matches(".*\\d.*")){ new ArabicOperation(s);}
                 else new RomanianOperation(s);
                 }
             }

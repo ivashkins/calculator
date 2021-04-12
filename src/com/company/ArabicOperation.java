@@ -2,9 +2,9 @@ package com.company;
 
 import java.util.List;
 
-public class MathOperation {
+public class ArabicOperation {
 
-    public MathOperation(String s) throws ExceptionIncorrectSymbolOperation {
+    public ArabicOperation(String s) throws ExceptionIncorrectSymbolOperation, ExceptionMaxNumber {
         if(s.contains("+")){String [] w=s.split("\\+"); parseNumber(w,"Sum");}
            else if(s.contains("/")){String [] w=s.split("/"); parseNumber(w,"Del");}
            else if(s.contains("*")){String [] w=s.split("\\*"); parseNumber(w,"Incr");}
@@ -13,9 +13,10 @@ public class MathOperation {
     }
 
 
-    public void parseNumber(String []s,String key){
+    public void parseNumber(String []s,String key) throws ExceptionMaxNumber {
         long a=Long.parseLong(s[0]);
         long b=Long.parseLong(s[1]);
+        if(a>10||b>10){throw new ExceptionMaxNumber();}
         long c = switch (key) {
             case "Sum" -> a + b;
             case "Del" -> a / b;
